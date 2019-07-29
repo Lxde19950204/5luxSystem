@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import authRoute from "@components/authRoute"
+import LayoutCom from "@layout"
+import {layoutRouteComponent}  from "@route"
+import {Switch,Redirect} from "react-router-dom"
+import routerEach from "@utils/routerEach"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+console.log(routerEach)
+const pages = routerEach(layoutRouteComponent)
+console.log(pages)
+class App extends Component {
+    render() {
+        return (
+            <Switch>
+                <LayoutCom>
+                        <Redirect from="/" to="/home" exact/>
+                        {
+                            pages
+                        }
+                </LayoutCom>    
+            </Switch>
+        );
+    }
 }
 
-export default App;
+export default authRoute(App);
